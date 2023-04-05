@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Main Page{% endblock %}
+
+{% block content %}
+    <div class="song-list">
+    {% for mp3model in mp3list %}
+
+
+        <h1 class="text-muted">
+            {% if mp3model.playlist %}
+                <a href="{{ mp3model.playlist }}">{{ mp3model.playlist }}</a> /
+            {% endif %}{{ mp3model.name }}</h1>
+
+
+        {% if mp3model.photo %}
+        <img class="img-size" src="{{ mp3model.photo.url }}" alt="">
+        {% endif %}
+        <button id="{{ mp3model.name }}" onclick="myFunction('{{ mp3model.name }}', '{{ mp3model.singer }}')"
+                value="{{ mp3model.mp3_file.url }}" class="btn btn-outline-secondary">
+        Play
+        </button>
+
+    {% endfor %}
+    </div>
+
+
+    <div class="fixed-bottom">
+        <span class="text-white bg-dark" style="float: right" id="current-music">Playlist is empty.</span>
+
+        <audio controls id="myaudio" muted style="width: 100%">
+        </audio>
+    </div>
+
+    <script>
+        function myFunction(kk, singer){
+            const cur_music = document.getElementById("current-music");
+            const btn = document.getElementById(kk);
+            const audio = document.getElementById("myaudio");
+
+            if (audio.muted){
+                audio.volume = 0.3;
+            }
+
+            if (audio.value !== kk )
+            {
+                audio.src = btn.value;
+                audio.muted = false;
+                audio.value = kk;
+                audio.play();
+            }
+
+            cur_music.textContent = `Now's playing: ${singer} - ${kk}`;
+
+        }
+    </script>
+{% endblock %}
