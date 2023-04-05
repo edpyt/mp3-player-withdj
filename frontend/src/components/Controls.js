@@ -44,6 +44,7 @@ let Controls = () =>{
         return (
             <div className="controls">
                 <audio ref={audio}
+                       autoPlay
                        onTimeUpdate={(e) => setCurrentTime(e.target.currentTime)}
                        onCanPlay={(e) => setDur(e.target.duration)}
                        onEnded={handleEnd}
@@ -81,7 +82,7 @@ let Controls = () =>{
               </span>
             </span>
 
-                <span className="next" onClick={nextSong}>
+            <span className="next" onClick={nextSong}>
                 <i className="fas fa-step-forward"></i>
             </span>
                 </div>

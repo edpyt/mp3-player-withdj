@@ -5,8 +5,6 @@ import playerContext from "../../context/playerContext";
 let Playlist = () => {
       const { SetCurrent, currentSong, songslist } = useContext(playerContext)
 
-    console.log(songslist)
-
     if (songslist) {
         return (
             <div className="playlist">
